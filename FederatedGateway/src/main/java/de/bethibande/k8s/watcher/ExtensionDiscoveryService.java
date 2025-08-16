@@ -66,6 +66,14 @@ public class ExtensionDiscoveryService {
             case ERROR, BOOKMARK -> {
             }
         }
+
+        for (final BiConsumer<Watcher.Action, MonitorFederatedExtension> listener : listeners) {
+            try {
+                listener.accept(action, resource);
+            } catch (final Throwable e) {
+                LOGGER.error("Error while notifying listener", e);
+            }
+        }
     }
 
     private void onWatcherClose(final WatcherException cause) {

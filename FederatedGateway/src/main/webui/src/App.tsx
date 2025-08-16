@@ -3,11 +3,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import {useEffect} from "react";
 import {useExtensions} from '@monitor/shared-library';
+import {fetchAvailableModulePaths} from "./utils/extensions.ts";
 
 function App() {
     const {extensions, loadExtension} = useExtensions();
     useEffect(() => {
-        loadExtension("http://localhost:5001/assets/remoteEntry.js").then(ext => console.log("Loaded extension: ", ext.name))
+        fetchAvailableModulePaths().then(urls => {
+            urls.forEach(url => loadExtension(url).then(ext => console.log("Loaded extension: ", ext)))
+        })
     }, []);
 
     console.log("Extensions: ", extensions)

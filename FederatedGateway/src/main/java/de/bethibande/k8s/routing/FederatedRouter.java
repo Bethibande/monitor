@@ -8,6 +8,8 @@ import io.quarkus.runtime.Startup;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -16,6 +18,8 @@ import java.util.regex.Pattern;
 @Startup
 @ApplicationScoped
 public class FederatedRouter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FederatedRouter.class);
 
     private final Map<String, List<FederatedRoute>> routes = new HashMap<>();
     private final ExtensionDiscoveryService extensionDiscoveryService;
@@ -38,6 +42,7 @@ public class FederatedRouter {
                 default -> {
                 }
             }
+            LOGGER.info("Router updated");
         }));
     }
 
@@ -56,18 +61,10 @@ public class FederatedRouter {
         return Optional.ofNullable(routes.get(extensionId)).flatMap(routes -> matchRoute(routes, subpath));
     }
 
-    private String capabilityToPathPrefix(final EndpointCapability capability) {
-        return switch (capability) {
-            case TRANSLATIONS -> "/translations";
-            case WEB_MODULE -> "/web";
-            case API -> "/api";
-        };
-    }
-
     private Pattern capabilityToPathPattern(final EndpointCapability capability) {
         return switch (capability) {
             case TRANSLATIONS -> Pattern.compile("^/translations");
-            case WEB_MODULE -> Pattern.compile("^/web/assets/module.js$");
+            case WEB_MODULE -> Pattern.compile("^/web/module.js$");
             case API -> Pattern.compile("/api(?<path>/.*)?");
         };
     }
@@ -75,7 +72,6 @@ public class FederatedRouter {
     private FederatedRoute toRoute(final MonitorFederatedEndpoint endpoint,
                                    final MonitorFederatedExtension extension) {
         return new FederatedRoute(
-                capabilityToPathPrefix(endpoint.getCapability()),
                 capabilityToPathPattern(endpoint.getCapability()),
                 endpoint,
                 extension
@@ -93,6 +89,14 @@ public class FederatedRouter {
         }
 
         this.routes.put(extension.getMetadata().getName(), routes);
+    }
+
+    public List<FederatedRoute> getAllRoutesByCapability(final EndpointCapability capability) {
+        return this.routes.values()
+                .stream()
+                .flatMap(Collection::stream)
+                .filter(endpoint -> endpoint.endpoint().getCapability() == capability)
+                .toList();
     }
 
 }
