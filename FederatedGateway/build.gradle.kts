@@ -1,0 +1,45 @@
+plugins {
+    java
+    id("io.quarkus")
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+val quarkusPlatformGroupId: String by project
+val quarkusPlatformArtifactId: String by project
+val quarkusPlatformVersion: String by project
+
+dependencies {
+    implementation("io.quarkus:quarkus-container-image-docker")
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-operator-sdk-bom:${quarkusPlatformVersion}"))
+    implementation("io.quarkus:quarkus-rest-jackson")
+    implementation("io.quarkus:quarkus-kubernetes-client")
+    implementation("io.quarkus:quarkus-kubernetes")
+    implementation("io.quarkiverse.operatorsdk:quarkus-operator-sdk")
+    implementation("io.quarkus:quarkus-arc")
+    implementation("io.quarkus:quarkus-rest")
+    testImplementation("io.quarkus:quarkus-junit5")
+    testImplementation("io.rest-assured:rest-assured")
+
+    implementation("io.fabric8:generator-annotations:7.3.1")
+}
+
+group = "de.bethibande.k8s"
+version = "1.0-SNAPSHOT"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType<Test> {
+    systemProperty("java.util.logging.manager", "org.jboss.logmanager.LogManager")
+}
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+    options.compilerArgs.add("-parameters")
+}
