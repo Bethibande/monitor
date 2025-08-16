@@ -43,6 +43,10 @@ public class ExtensionDiscoveryService {
 
     @PostConstruct
     void init() {
+        // We need to set this here to ensure the value is applied before the java http library is loaded.
+        // Otherwise, our proxy will not work as we won't be able to copy the following headers to a new request.
+        System.setProperty("jdk.httpclient.allowRestrictedHeaders", "host,content-length,expect,connection,upgrade");
+
         final List<MonitorFederatedExtension> extensions = this.listAll();
         for (final MonitorFederatedExtension extension : extensions) {
             this.extensions.put(extension.getMetadata().getName(), extension);
