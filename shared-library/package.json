@@ -1,6 +1,6 @@
 {
   "name": "@monitor/shared-library",
-  "version": "1.0.3-snapshot",
+  "version": "1.0.4-snapshot",
   "description": "",
   "main": "dist/shared-library.js",
   "module": "dist/shared-library.js",

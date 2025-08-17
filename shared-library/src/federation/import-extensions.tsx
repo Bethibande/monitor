@@ -20,21 +20,30 @@ interface ExtensionProviderProps {
     children: ReactNode;
 }
 
-export const ExtensionProvider: FC<ExtensionProviderProps> = ({ children }) => {
+type LoadedExtension = {
+    extension: ExtensionConfig,
+    url: string,
+}
+
+export const ExtensionProvider: FC<ExtensionProviderProps> = ({children}) => {
     const [extensions, setExtensions] = useState<ExtensionConfig[]>([]);
+    const [loadedExtensions, setLoadedExtensions] = useState<LoadedExtension[]>([]);
 
     const loadExtension = useCallback(async (url: string) => {
         try {
-            let extension = await __loadExtension(url)
+            const loaded = loadedExtensions.find(ex => ex.url === url)
+            if (loaded) {
+                return Promise.reject(loaded.extension)
+            }
 
-            setExtensions((prev) => {
-                const existing = prev.find((e) => e.name === extension.name);
-                if (existing) {
-                    extension = existing;
-                    return prev;
-                }
-                return [...prev || [], extension]
-            });
+            const extension = await __loadExtension(url)
+            const loadedExtension: LoadedExtension = {
+                extension: extension,
+                url: url
+            }
+
+            setLoadedExtensions([...loadedExtensions, loadedExtension])
+            setExtensions([...extensions, extension])
 
             return extension;
         } catch (error) {
