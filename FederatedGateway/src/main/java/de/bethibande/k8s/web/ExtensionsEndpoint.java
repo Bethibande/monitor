@@ -13,7 +13,7 @@ import java.util.List;
 @Path("/api/v1/extensions")
 public class ExtensionsEndpoint {
 
-    public static final String FEDERATED_MODULE_URL_TEMPLATE = "/fed/%s/web/module.js";
+    public static final String FEDERATED_MODULE_URL_TEMPLATE = "/fed/%s/web/assets/remoteEntry.js";
 
     private final ExtensionDiscoveryService extensionDiscoveryService;
     private final FederatedRouter federatedRouter;

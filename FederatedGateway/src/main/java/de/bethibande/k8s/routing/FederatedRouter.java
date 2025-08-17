@@ -47,8 +47,9 @@ public class FederatedRouter {
     }
 
     private Optional<FederatedRoute> matchRoute(final List<FederatedRoute> routes, final String path) {
+        final String normalizedPath = path.startsWith("/") ? path : "/" + path;
         for (final FederatedRoute route : routes) {
-            final Matcher matcher = route.pattern().matcher(path);
+            final Matcher matcher = route.pattern().matcher(normalizedPath);
             if (matcher.matches()) {
                 return Optional.of(route);
             }
@@ -58,14 +59,15 @@ public class FederatedRouter {
     }
 
     public Optional<FederatedRoute> matchRoute(final String extensionId, final String subpath) {
-        return Optional.ofNullable(routes.get(extensionId)).flatMap(routes -> matchRoute(routes, subpath));
+        return Optional.ofNullable(routes.get(extensionId))
+                .flatMap(routes -> matchRoute(routes, subpath));
     }
 
     private Pattern capabilityToPathPattern(final EndpointCapability capability) {
         return switch (capability) {
             case TRANSLATIONS -> Pattern.compile("^/translations");
-            case WEB_MODULE -> Pattern.compile("^/web/module.js$");
-            case API -> Pattern.compile("/api(?<path>/.*)?");
+            case WEB_MODULE -> Pattern.compile("^/web(?<path>/.*)?");
+            case API -> Pattern.compile("^/api(?<path>/.*)?");
         };
     }
 

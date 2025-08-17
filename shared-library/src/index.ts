@@ -1,14 +1,9 @@
-import type {ReactNode} from "react";
 import type {NavItem} from "./navigation";
-
-export interface ConfiguredRoute {
-    path: string;
-    view: ReactNode;
-}
+import type {RouteObject} from 'react-router';
 
 export interface ExtensionConfig {
     name: string;
-    routes?: ConfiguredRoute[];
+    routes?: RouteObject[];
     navItems?: NavItem[];
 }
 

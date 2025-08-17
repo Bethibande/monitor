@@ -14,6 +14,7 @@ export default defineConfig({
             external: [
                 'react',
                 'react-dom',
+                'react-router',
                 'virtual:__federation__',
                 'react/jsx-runtime',
             ],

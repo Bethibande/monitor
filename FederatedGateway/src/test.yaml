@@ -11,7 +11,7 @@ spec:
           permission: ext.metrics.read
         - path: "/v1/admin"
           permission: system.admin
-    - endpoint: http://host.docker.internal:8082/federated/web/assets/remoteEntry.js
+    - endpoint: http://localhost:8082/federated/web
       capability: WebModule
     - endpoint: http://backend.metrics.svc.cluster.local/federated/translations
       capability: Translations
