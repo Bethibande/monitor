@@ -45,16 +45,16 @@ This configuration would generate the following external routes:
 ### Web Federation
 The frontend implements an extendable infrastructure using the [vite module federation plugin](https://github.com/originjs/vite-plugin-federation).
 The gateways internal API will expose a list of available web modules, this list is read by the frontend on runtime and then loaded.
-Each extension must export a default config specifying its id and all of the features it provides and configuration it requires.
+Each extension must export a default config specifying its id and all the features it provides and configuration it requires.
 That way extensions can configure custom routes in the frontend and add new entries to the nav-bar.
 Extensions may also provide components used by other views such as widgets and more.
 
-For an example of a working extension with a web-module,
-take a look at the [extension-template](../extension-template) module.
+For an example of a working extension with a web-module, take a look at the [extension-template](../extension-template) module.
 
 The frontend expects there to be a ``remoteEntry.js`` for your WebModule endpoint located at ``/fed/<extension-name>/web/assets/remoteEntry.js``.
+Loading this file with the example configuration above will result in the following url being proxied: ``http://backend.metrics.svc.cluster.local/federated/web/assets/remoteEntry.js``.
 Due to how this js module is built by the federation plugin, the gateway applies a quick rewrite to the file to change the paths specified
-inside, to ensure additional files are loded correctly.
+inside, ensuring additional files are loaded correctly.
 
 The extension itself will need to expose an extension-config module with a default export containing the configuration
 as specified by the shared-library npm package.
@@ -84,10 +84,6 @@ const config: ExtensionConfig = {
 
 export default config;
 ```
-
-> [!WARNING]
-> This feature is under active development and subject to changes.
-> More information on the implementation details will follow at a later date.
 
 ### Translations API
 The gateway provides a built-in translation API. This API is used by the frontend to load translations.
