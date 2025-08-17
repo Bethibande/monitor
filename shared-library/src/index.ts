@@ -8,3 +8,4 @@ export interface ExtensionConfig {
 }
 
 export * from './federation/import-extensions';
+export * from './api/api';
