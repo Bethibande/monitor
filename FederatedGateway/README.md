@@ -27,7 +27,7 @@ spec:
           permission: ext.metrics.read
         - path: "/v1/admin"
           permission: system.admin
-    - endpoint: http://backend.metrics.svc.cluster.local/federated/web/assets/siteEntry.js
+    - endpoint: http://backend.metrics.svc.cluster.local/federated/web/
       capability: WebModule
     - endpoint: http://backend.metrics.svc.cluster.local/federated/translations
       capability: Translations
@@ -36,7 +36,7 @@ This configuration would generate the following external routes:
 - `/fed/metrics/api/*`
   - `/fed/metrics/api/v1/metrics` Will require the permission `ext.metrics.read` to access
   - `/fed/metrics/api/v1/admin` Will require the permission `system.admin` to access
-- `/fed/metrics/web/module.js` Will serve the federated web module, loaded by the frontend on runtime. See [here](#web-federation) for more information.
+- `/fed/metrics/web/` Will serve the federated web module, loaded by the frontend on runtime. See [here](#web-federation) for more information.
 - `/fed/metrics/translations` Will serve an implementation of the built-in translation API. See [here](#translations-api) for more information.
 
 > [!CAUTION]
@@ -49,9 +49,45 @@ Each extension must export a default config specifying its id and all of the fea
 That way extensions can configure custom routes in the frontend and add new entries to the nav-bar.
 Extensions may also provide components used by other views such as widgets and more.
 
+For an example of a working extension with a web-module,
+take a look at the [extension-template](../extension-template) module.
+
+The frontend expects there to be a ``remoteEntry.js`` for your WebModule endpoint located at ``/fed/<extension-name>/web/assets/remoteEntry.js``.
+Due to how this js module is built by the federation plugin, the gateway applies a quick rewrite to the file to change the paths specified
+inside, to ensure additional files are loded correctly.
+
+The extension itself will need to expose an extension-config module with a default export containing the configuration
+as specified by the shared-library npm package.
+You can configure the export using the federation plugin by applying it to the vite.config.ts file like this:
+```ts
+federation({
+    name: "remote_app",
+    filename: "remoteEntry.js",
+    exposes: {
+        './extension-config': './src/extension-config'
+    },
+    shared: [
+        'react',
+        'react-dom',
+        "@monitor/shared-library",
+        "react/jsx-runtime",
+        "react-router",
+    ]
+})
+```
+And then create the config file ``src/extension-config.ts`` with the following content:
+```ts
+const config: ExtensionConfig = {
+    name: "my-extension",
+    /* routes provided by your extension, and more */
+}
+
+export default config;
+```
+
 > [!WARNING]
-> This feature is not yet implemented.
-> More information on the implementation details will follow later.
+> This feature is under active development and subject to changes.
+> More information on the implementation details will follow at a later date.
 
 ### Translations API
 The gateway provides a built-in translation API. This API is used by the frontend to load translations.

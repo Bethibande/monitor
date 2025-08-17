@@ -4,7 +4,7 @@ metadata:
   name: metrics
 spec:
   endpoints:
-    - endpoint: http://backend.metrics.svc.cluster.local/federated/api
+    - endpoint: http://localhost:8082/federated/api
       capability: API
       filters:
         - path: "/v1/metrics"
@@ -13,5 +13,5 @@ spec:
           permission: system.admin
     - endpoint: http://localhost:8082/federated/web
       capability: WebModule
-    - endpoint: http://backend.metrics.svc.cluster.local/federated/translations
+    - endpoint: http://localhost:8082/federated/translations
       capability: Translations

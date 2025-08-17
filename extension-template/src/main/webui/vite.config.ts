@@ -15,7 +15,13 @@ export default defineConfig({
             exposes: {
                 './extension-config': './src/extension-config'
             },
-            shared: ['react','react-dom', "@monitor/shared-library"]
+            shared: [
+                'react',
+                'react-dom',
+                "@monitor/shared-library",
+                "react-router",
+                "react/jsx-runtime",
+            ]
         })
     ],
     build: {
