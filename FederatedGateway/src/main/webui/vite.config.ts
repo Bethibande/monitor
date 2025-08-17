@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import federation from '@originjs/vite-plugin-federation'
 
 import pkg from './package.json';
+import tailwindcss from "@tailwindcss/vite";
 
 const { dependencies } = pkg;
 
@@ -13,6 +14,7 @@ export default defineConfig({
     },
     plugins: [
         react(),
+        tailwindcss(),
         federation({
             name: 'app',
             remotes: {

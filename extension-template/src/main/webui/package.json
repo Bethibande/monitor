@@ -11,7 +11,7 @@
     "serve": "vite preview --port 5001 --strictPort --base=/federated/web"
   },
   "dependencies": {
-    "@monitor/shared-library": "^1.0.3-snapshot",
+    "@monitor/shared-library": "^1.0.10-snapshot",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

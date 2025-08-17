@@ -4,7 +4,9 @@ import {useExtensions} from '@monitor/shared-library';
 import {fetchAvailableModulePaths} from "./utils/extensions.ts";
 import {createBrowserRouter, type RouteObject} from "react-router";
 import {RouterProvider} from "react-router/dom";
-import AppLayout from "./AppLayout.tsx";
+import AppLayout from "./layouts/AppLayout.tsx";
+import ErrorLayout from "./layouts/ErrorLayout.tsx";
+import "@monitor/shared-library/dist/shared-library.css"
 
 function App() {
     const {extensions, loadExtension} = useExtensions();
@@ -19,6 +21,7 @@ function App() {
 
     const router = createBrowserRouter([{
         path: "/",
+        ErrorBoundary: ErrorLayout, // TODO: Create actual error boundary
         Component: AppLayout,
         children: routes
     }]);

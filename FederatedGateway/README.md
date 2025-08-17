@@ -75,7 +75,7 @@ federation({
     ]
 })
 ```
-And then create the config file ``src/extension-config.ts`` with the following content:
+Then create the config file ``src/extension-config.tsx`` with the following content:
 ```ts
 const config: ExtensionConfig = {
     name: "my-extension",

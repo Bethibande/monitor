@@ -1,6 +1,6 @@
 {
   "name": "@monitor/shared-library",
-  "version": "1.0.4-snapshot",
+  "version": "1.0.10-snapshot",
   "description": "",
   "main": "dist/shared-library.js",
   "module": "dist/shared-library.js",
@@ -10,7 +10,8 @@
       "import": "./dist/shared-library.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./dist/shared-library.css": "./dist/shared-library.css"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,11 +24,19 @@
   "devDependencies": {
     "@types/node": "^24.3.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "tw-animate-css": "^1.3.7",
     "typescript": "^5.9.2",
     "vite": "^7.1.2"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
+    "@tailwindcss/vite": "^4.1.12",
     "@types/react": "^19.1.10",
-    "react-router": "^7.8.1"
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.539.0",
+    "react-router": "^7.8.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.12"
   }
 }
