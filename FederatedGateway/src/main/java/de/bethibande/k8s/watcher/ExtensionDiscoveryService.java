@@ -73,6 +73,7 @@ public class ExtensionDiscoveryService {
     }
 
     private void onWatcherClose(final WatcherException cause) {
+        LOGGER.error("Watcher closed unexpectedly", cause);
         watch();
     }
 
