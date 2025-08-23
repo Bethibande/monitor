@@ -8,7 +8,6 @@ It's responsible for
 #### Conents
 - [Routing](#routing)
 - [Web Federation](#web-federation)
-- [Translations API](#translations-api)
 
 ### Routing
 By default the gateway serves the cor web app under the route `/`. Other internal services are proxied under `/fed/<extension-name>/*`.
@@ -29,15 +28,12 @@ spec:
           permission: system.admin
     - endpoint: http://backend.metrics.svc.cluster.local/federated/web/
       capability: WebModule
-    - endpoint: http://backend.metrics.svc.cluster.local/federated/translations
-      capability: Translations
 ```
 This configuration would generate the following external routes:
 - `/fed/metrics/api/*`
   - `/fed/metrics/api/v1/metrics` Will require the permission `ext.metrics.read` to access
   - `/fed/metrics/api/v1/admin` Will require the permission `system.admin` to access
 - `/fed/metrics/web/` Will serve the federated web module, loaded by the frontend on runtime. See [here](#web-federation) for more information.
-- `/fed/metrics/translations` Will serve an implementation of the built-in translation API. See [here](#translations-api) for more information.
 
 > [!CAUTION]
 > Please note that user permissions are not yet implemented.
@@ -84,10 +80,3 @@ const config: ExtensionConfig = {
 
 export default config;
 ```
-
-### Translations API
-The gateway provides a built-in translation API. This API is used by the frontend to load translations.
-
-> [!WARNING]
-> This feature is not yet implemented.
-> More information on the implementation details will follow later.

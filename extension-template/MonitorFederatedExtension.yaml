@@ -13,5 +13,3 @@ spec:
           permission: system.admin
     - endpoint: http://localhost:8082/federated/web
       capability: WebModule
-    - endpoint: http://localhost:8082/federated/translations
-      capability: Translations

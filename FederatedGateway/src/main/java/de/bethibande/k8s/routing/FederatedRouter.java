@@ -65,7 +65,6 @@ public class FederatedRouter {
 
     private Pattern capabilityToPathPattern(final EndpointCapability capability) {
         return switch (capability) {
-            case TRANSLATIONS -> Pattern.compile("^/translations");
             case WEB_MODULE -> Pattern.compile("^/web(?<path>/.*)?");
             case API -> Pattern.compile("^/api(?<path>/.*)?");
         };
