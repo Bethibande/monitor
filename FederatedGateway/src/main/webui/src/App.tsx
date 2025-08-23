@@ -21,7 +21,7 @@ function App() {
 
     const router = createBrowserRouter([{
         path: "/",
-        ErrorBoundary: ErrorLayout, // TODO: Create actual error boundary
+        ErrorBoundary: ErrorLayout,
         Component: AppLayout,
         children: routes
     }]);
