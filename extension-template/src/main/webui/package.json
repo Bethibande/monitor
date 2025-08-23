@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsc -b && vite build --base=/federated/web && vite preview --port 5001 --strictPort --base=/federated/web",
+    "dev": "bash ./dev.sh",
     "build": "tsc -b && vite build --base=/federated/web",
     "lint": "eslint .",
     "preview": "vite preview --port 5001 --strictPort --base=/federated/web",
