@@ -1,15 +1,16 @@
 import {useExtensions} from "@monitor/shared-library";
+import {translate} from "../extension-config.tsx";
 
 export default function MyView() {
     const {extensions} = useExtensions();
 
     return <div>
-        <h2>My extension view.</h2>
-        <p>Hello World!</p>
+        <h2>{translate("view.title")}</h2>
+        <p>{translate("view.helloWorld")}</p>
 
-        <h3>Loaded extensions:</h3>
+        <h3>{translate("view.loadedExtensions")}</h3>
         <div>
-            {extensions.map(ext => <div key={ext.name}>{ext.name}</div>)}
+            {extensions.map(ext => <div key={ext.name}>&bull;&nbsp;{ext.name}</div>)}
         </div>
     </div>
 }

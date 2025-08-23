@@ -21,7 +21,8 @@ export default defineConfig({
                 "@monitor/shared-library",
                 "react-router",
                 "react/jsx-runtime",
-                "react-bootstrap-icons"
+                "react-bootstrap-icons",
+                "i18next"
             ]
         })
     ],

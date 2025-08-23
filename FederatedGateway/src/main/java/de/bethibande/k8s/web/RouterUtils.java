@@ -14,7 +14,6 @@ public class RouterUtils {
         final String normalizedPath = path.startsWith("/") ? path : "/" + path;
 
         return switch (route.endpoint().getCapability()) {
-            case TRANSLATIONS -> route.endpoint().getEndpoint();
             case API, WEB_MODULE -> {
                 final Matcher matcher = route.pattern().matcher(normalizedPath);
                 final String subPath = matcher.matches() ? matcher.group("path") : "/";

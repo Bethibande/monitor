@@ -2,10 +2,21 @@ import {cn, type NavItem, useExtensions} from "@monitor/shared-library";
 import {Activity, ChevronDown, Diagram2, Tag} from "react-bootstrap-icons";
 import {NavLink} from "react-router";
 import {type ReactNode, useState} from "react";
+import i18next from "i18next";
+
+type NavText = string | (() => string);
+
+function renderText(name: NavText): string {
+    if (typeof name === "string") {
+        return name;
+    } else {
+        return name();
+    }
+}
 
 function BasicItemWithText(props: {
     icon?: ReactNode,
-    text: string,
+    text: NavText,
     suffixIcon?: ReactNode,
     focusable?: boolean,
     ariaExpanded?: boolean,
@@ -15,7 +26,7 @@ function BasicItemWithText(props: {
         <BasicItem focusable={props.focusable} onClick={props.onClick} ariaExpanded={props.ariaExpanded}>
             <span className={"flex flex-row gap-2 items-center font-semibold text-white"}>
                 {props.icon}
-                {props.text}
+                {renderText(props.text)}
 
                 {props.suffixIcon && <div className={"pr-0 ml-auto"}>
                     {props.suffixIcon}
@@ -51,7 +62,7 @@ function BasicItem(props: {
     )
 }
 
-function GroupedItem(props: { icon?: ReactNode, text: string, children: NavItem[] }) {
+function GroupedItem(props: { icon?: ReactNode, text: NavText, children: NavItem[] }) {
     const [open, setOpen] = useState(false)
 
     return (
@@ -73,12 +84,12 @@ function GroupedItem(props: { icon?: ReactNode, text: string, children: NavItem[
 function renderItem(item: NavItem, focusable?: boolean) {
     let component;
     if (item.children) {
-        component = <GroupedItem key={item.url || item.name}
+        component = <GroupedItem key={item.url || renderText(item.name)}
                                  text={item.name}
                                  icon={item.icon}
                                  children={item.children}/>
     } else {
-        component = <BasicItemWithText key={item.url || item.name}
+        component = <BasicItemWithText key={item.url || renderText(item.name)}
                                        text={item.name}
                                        icon={item.icon}
                                        focusable={!item.url && focusable}
@@ -86,7 +97,7 @@ function renderItem(item: NavItem, focusable?: boolean) {
     }
 
     if (item.url) {
-        return (<NavLink key={item.url || item.name}
+        return (<NavLink key={item.url || renderText(item.name)}
                          tabIndex={focusable ? 0 : -1}
                          className={({isActive}) => cn("group nav-link rounded-md", isActive && "active")}
                          to={item.url}>
@@ -103,7 +114,7 @@ function itemsToTree(items: NavItem[]) {
 export default function SideNav() {
     const primary: NavItem[] = [
         {
-            name: "Overview",
+            name: i18next.t("test"),
             icon: <Activity/>,
             url: "/overview"
         },

@@ -1,7 +1,7 @@
-import type {ReactNode} from "react";
+import {ReactNode} from "react";
 
 export interface NavItem {
-    name: string;
+    name: string | (() => string);
     url?: string;
     children?: NavItem[];
     icon?: ReactNode,

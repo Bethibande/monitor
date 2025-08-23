@@ -6,6 +6,11 @@ export interface ExtensionConfig {
     name: string;
     routes?: RouteObject[];
     navItems?: NavItem[];
+    translations?: Translations
+}
+
+export interface Translations {
+    [language: string]: Record<string, string>;
 }
 
 export * from './navigation';
