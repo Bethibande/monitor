@@ -28,7 +28,7 @@ public class ExtensionDiscoveryService {
 
     private Watch watch;
 
-    private List<BiConsumer<Watcher.Action, MonitorFederatedExtension>> listeners = new ArrayList<>();
+    private final List<BiConsumer<Watcher.Action, MonitorFederatedExtension>> listeners = new ArrayList<>();
 
     public ExtensionDiscoveryService(final KubernetesClient client) {
         this.client = client;
