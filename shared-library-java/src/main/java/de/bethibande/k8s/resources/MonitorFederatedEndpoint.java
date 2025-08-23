@@ -1,6 +1,8 @@
 package de.bethibande.k8s.resources;
 
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import de.bethibande.k8s.resources.EndpointCapability;
+import de.bethibande.k8s.resources.MonitorFederatedAccessFilter;
 import io.fabric8.generator.annotation.Required;
 import io.fabric8.generator.annotation.Size;
 

@@ -19,6 +19,8 @@ dependencies {
     implementation("io.quarkus:quarkus-arc")
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
+
+    implementation("de.bethibande.k8s:shared-library-java:1.0-SNAPSHOT")
 }
 
 group = "de.bethibande.k8s"

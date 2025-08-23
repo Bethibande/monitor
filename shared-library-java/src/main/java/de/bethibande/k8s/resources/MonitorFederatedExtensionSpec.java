@@ -1,5 +1,6 @@
 package de.bethibande.k8s.resources;
 
+import de.bethibande.k8s.resources.MonitorFederatedEndpoint;
 import io.fabric8.generator.annotation.Required;
 import io.fabric8.generator.annotation.Size;
 

@@ -1,5 +1,5 @@
 import {cn, type NavItem, useExtensions} from "@monitor/shared-library";
-import {Activity, ChevronDown, Diagram2, Folder, Gear, Grid, HddStack, Shield, Tag, Wifi} from "react-bootstrap-icons";
+import {Activity, ChevronDown, Diagram2, Tag} from "react-bootstrap-icons";
 import {NavLink} from "react-router";
 import {type ReactNode, useState} from "react";
 

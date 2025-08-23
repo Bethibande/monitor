@@ -27,6 +27,8 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured")
 
     implementation("io.fabric8:generator-annotations:7.3.1")
+
+    implementation("de.bethibande.k8s:shared-library-java:1.0-SNAPSHOT")
 }
 
 group = "de.bethibande.k8s"
