@@ -1,5 +1,5 @@
 import {ContextScope, useClusterContext} from "@monitor/shared-library";
-import ClusterOverview from "./ClusterOverview.tsx";
+import {ClusterOverview} from "./ClusterOverview.tsx";
 import NodeOverview from "./NodeOverview.tsx";
 import NamespaceOverview from "./NamespaceOverview.tsx";
 

@@ -8,7 +8,7 @@ export default function AppLayout() {
             <div>
                 <SideNav/>
             </div>
-            <div className={"p-4"}>
+            <div className={"p-4 w-full h-full"}>
                 <Outlet/>
             </div>
         </div>

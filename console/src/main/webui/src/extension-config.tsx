@@ -2,6 +2,7 @@ import type {ExtensionConfig} from '@monitor/shared-library';
 import {lazy} from "react";
 import i18next from "i18next";
 import {primary, secondary} from "./nav-config.tsx";
+import {translations as ClusterOverviewTranslations} from "./views/overview/ClusterOverview.tsx";
 import './extension.css';
 
 const name = "console";
@@ -50,6 +51,7 @@ const config: ExtensionConfig = {
             "nav.security.clusterRoleBindings": "ClusterRoleBindings",
             "nav.CRDs": "CRDs",
             "nav.settings": "Settings",
+            ...ClusterOverviewTranslations.en
         }
     }
 }
