@@ -1,0 +1,15 @@
+apiVersion: de.bethibande/v1alpha1
+kind: MonitorFederatedExtension
+metadata:
+  name: console
+spec:
+  endpoints:
+    - endpoint: http://localhost:8082/federated/api
+      capability: API
+      filters:
+        - path: "/v1/metrics"
+          permission: ext.metrics.read
+        - path: "/v1/admin"
+          permission: system.admin
+    - endpoint: http://localhost:8082/federated/web
+      capability: WebModule

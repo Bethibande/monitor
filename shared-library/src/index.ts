@@ -13,11 +13,11 @@ export interface NavItems {
     /**
      * The primary item group is always fixed to the top of the nav-bar and should only contain the most important items.
      */
-    primary: NavItem[],
+    primary?: NavItem[],
     /**
      * The secondary item group contains all other items and is scrollable
      */
-    secondary: NavItem[],
+    secondary?: NavItem[],
 }
 
 export interface Translations {

@@ -50,7 +50,7 @@ export default function ContextSelect() {
 
     useEffect(() => {
         apiClient.fetch<ClusterContext[]>("/context").then(json => setContexts(json))
-    })
+    }, [])
 
     const clusters = filterScopeAndSearch(contexts, ContextScope.CLUSTER, search)
     const nodes = filterScopeAndSearch(contexts, ContextScope.NODE, search)
@@ -80,7 +80,7 @@ export default function ContextSelect() {
             <PopoverContent align={"start"}>
                 <div className={"flex flex-col gap-2"}>
                     <div>
-                        <Input placeholder={i18next.t("nav.context.search")} onChange={e => setSearch(e.target.value)}/>
+                        <Input value={search} placeholder={i18next.t("nav.context.search")} onChange={e => setSearch(e.target.value)}/>
                     </div>
                     <div className={"flex flex-col gap-2"}>
                         {clusters.length > 0 && (
