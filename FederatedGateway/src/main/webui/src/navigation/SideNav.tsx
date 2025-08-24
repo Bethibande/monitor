@@ -1,8 +1,7 @@
 import {cn, type NavItem, useExtensions} from "@monitor/shared-library";
-import {Activity, ChevronDown, Diagram2, Tag} from "react-bootstrap-icons";
+import {ChevronDown} from "react-bootstrap-icons";
 import {NavLink} from "react-router";
 import {type ReactNode, useState} from "react";
-import i18next from "i18next";
 
 type NavText = string | (() => string);
 
@@ -112,7 +111,7 @@ function itemsToTree(items: NavItem[]) {
 }
 
 export default function SideNav() {
-    const primary: NavItem[] = [
+    /*const primary: NavItem[] = [
         {
             name: i18next.t("test"),
             icon: <Activity/>,
@@ -129,7 +128,7 @@ export default function SideNav() {
             url: "/resources/namespaces"
         }
     ]
-    /*const secondary: NavItem[] = [
+    const secondary: NavItem[] = [
         {
             name: "Workloads",
             icon: <Grid/>,
@@ -187,7 +186,8 @@ export default function SideNav() {
     //const {context, setContext} = useClusterContext()
 
     const {extensions} = useExtensions();
-    const secondary: NavItem[] = extensions.flatMap(ext => ext.navItems || []);
+    const primary: NavItem[] = extensions.flatMap(ext => ext.navItems?.primary || []);
+    const secondary: NavItem[] = extensions.flatMap(ext => ext.navItems?.secondary || []);
 
     return (
         <div className={"h-full rounded-r-xl bg-blue-500 flex flex-col items-center gap-2 text-white side-nav"}>

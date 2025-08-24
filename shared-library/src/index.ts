@@ -5,8 +5,19 @@ import './index.css';
 export interface ExtensionConfig {
     name: string;
     routes?: RouteObject[];
-    navItems?: NavItem[];
+    navItems?: NavItems;
     translations?: Translations
+}
+
+export interface NavItems {
+    /**
+     * The primary item group is always fixed to the top of the nav-bar and should only contain the most important items.
+     */
+    primary: NavItem[],
+    /**
+     * The secondary item group contains all other items and is scrollable
+     */
+    secondary: NavItem[],
 }
 
 export interface Translations {
