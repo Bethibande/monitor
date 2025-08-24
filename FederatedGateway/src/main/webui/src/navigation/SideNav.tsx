@@ -2,6 +2,7 @@ import {cn, type NavItem, useExtensions} from "@monitor/shared-library";
 import {ChevronDown} from "react-bootstrap-icons";
 import {NavLink} from "react-router";
 import {type ReactNode, useState} from "react";
+import ContextSelect from "./ContextSelect.tsx";
 
 type NavText = string | (() => string);
 
@@ -191,10 +192,9 @@ export default function SideNav() {
 
     return (
         <div className={"h-full rounded-r-xl bg-blue-500 flex flex-col items-center gap-2 text-white side-nav"}>
-            {/*<div
-                className={"flex flex-row gap-2 w-full items-center p-4 scroll-stable overflow-y-auto min-h-fit px-4"}>
-                <ContextSelect context={context || DefaultClusterContext} setContext={setContext}/>
-            </div>*/}
+            {<div className={"flex flex-row gap-2 w-full items-center p-4 scroll-stable overflow-y-auto min-h-fit px-4"}>
+                <ContextSelect/>
+            </div>}
             <div className={"p-2 px-4 flex flex-col gap-1 w-full scroll-stable min-h-fit overflow-y-auto"}>
                 {itemsToTree(primary)}
             </div>

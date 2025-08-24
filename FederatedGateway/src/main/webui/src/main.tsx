@@ -1,8 +1,8 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import {ExtensionProvider} from '@monitor/shared-library'
+import {ApiClientBuilder, ClusterContextProvider, ExtensionProvider} from '@monitor/shared-library'
 import i18next from "i18next";
 
 i18next.init({
@@ -10,16 +10,24 @@ i18next.init({
     resources: {
         en: {
             translation: {
-                "test": "ABC"
+                "nav.context.search": "Search",
+                "nav.context.more": "+ {{num, number}} more",
             }
         }
     }
 })
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ExtensionProvider>
-        <App />
-    </ExtensionProvider>
-  </StrictMode>,
+    <StrictMode>
+        <ClusterContextProvider>
+            <ExtensionProvider>
+                <App/>
+            </ExtensionProvider>
+        </ClusterContextProvider>
+    </StrictMode>,
 )
+
+
+export const apiClient = new ApiClientBuilder()
+    .withBaseUrl("/api/v1")
+    .build();
